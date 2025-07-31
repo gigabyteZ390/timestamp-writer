@@ -1,7 +1,7 @@
 body {
   font-family: 'Sans Code', monospace;
   width: 300px;
-  height: 300px;
+  height: 225px;
   background-color: #f5f5f5;
   color: #333;
 }
@@ -12,41 +12,58 @@ body {
   margin-bottom: 30px;
 }
 
-button {
-  padding: 8px 12px;
-  background-color: #0069d9;
+.dropbtn {
+  background-color: #2B93D0;
+  width: 300px;
+  color: rgb(255, 255, 255);
+  padding: 16px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  font-family: 'Sans Code', monospace;
   border: none;
-  border-radius: 4px;
-  color: white;
   cursor: pointer;
 }
 
-button:hover {
-  background-color: #0053ba;
+.dropdown {
+  position: relative;
+  display: inline-block;
 }
 
+.dropdown:hover .dropdown-content {
+  display: block;
+}
 
-/* 
+.dropdown:hover .dropbtn {
+  background-color: #2b94d0c0;
+}
 
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #4b4b4b;
+  min-width: 300px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
 
-<div class="dropdown">
-  <button class="dropbtn">Dropdown</button>
-  <div class="dropdown-content">
-    <a href="#">Link 1</a>
-    <a href="#">Link 2</a>
-    <a href="#">Link 3</a>
-  </div>
-</div> 
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: rgb(255, 255, 255);
+  text-align: center;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
 
+.dropdown-content a:hover {background-color: #5e5e5e}
 
-
-
-<body>
-  <h1>Welcome to the timestamp writer !</h1>
-  <h2>Choose your format</h2>
-  <button id="btn">Clique</button>
-</body>
-
-
-
-*/
+.write-button {
+  background-color: #2B93D0;
+  width: 300px;
+  color: rgb(255, 255, 255);
+  padding: 16px;
+  font-size: 16px;
+  font-family: 'Sans Code', monospace;
+  border: none;
+  cursor: pointer;
+}
