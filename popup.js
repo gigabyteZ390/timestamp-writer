@@ -1,14 +1,18 @@
+let selected = null;
 document.addEventListener("DOMContentLoaded", () => {
   const options = document.querySelectorAll(".dropdown-option");
-  const button = document.querySelector('.format-button');
+  const formatButton = document.querySelector('.format-button');
+  const writeButton = document.querySelector('.write-button');
 
 //* Sélection d’un format au clic
-  options.forEach(option => {
+  options.forEach((option, index) => {
+    option.dataset.index = index;
     option.addEventListener("click", () => {
       options.forEach(opt => opt.classList.remove("selected"));
       option.classList.add("selected");
-      const selected = document.querySelector(".dropdown-option.selected");
+      selected = document.querySelector(".dropdown-option.selected");
       if (selected) console.log(selected.textContent);
+      getDate();
     });
   });
 
@@ -60,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let buttonContent = true;
 
 //* permet de changer la vue entre pattern et preview
-  button.addEventListener('click', () => {
+  formatButton.addEventListener('click', () => {
     const toggleLinkContent = linkContent ? previewTexts : patternTexts;
     const toggleButtonContent = buttonContent ? patternFormat : previewFormat;
     options.forEach((a, i) => {
@@ -68,8 +72,64 @@ document.addEventListener("DOMContentLoaded", () => {
         a.textContent = toggleLinkContent[i];
       }
     });
-    button.textContent = toggleButtonContent;
+    formatButton.textContent = toggleButtonContent;
     buttonContent = !buttonContent;
     linkContent = !linkContent;
   });
-});
+})
+
+  const dateFormats = {
+      0: (yyyy, MM, dd, d, HH, mm, ss, MMM) => `${MM}/${dd}/${yyyy} ${HH}:${mm}`,
+      1: (yyyy, MM, dd, d, HH, mm, ss, MMM) => `${MM}/${dd}/${yyyy} ${HH}:${mm}:${ss}`,
+      2: (yyyy, MM, dd, d, HH, mm, ss, MMM) => `${yyyy}/${MM}/${dd} ${HH}:${mm}`,
+      3: (yyyy, MM, dd, d, HH, mm, ss, MMM) => `${yyyy}/${MM}/${dd} ${HH}:${mm}:${ss}`,
+      4: (yyyy, MM, dd, d, HH, mm, ss, MMM) => `${MMM}/${dd}/${yyyy} ${HH}:${mm}`,
+      5: (yyyy, MM, dd, d, HH, mm, ss, MMM) => `${MMM}/${dd}/${yyyy} ${HH}:${mm}:${ss}`,
+      6: (yyyy, MM, dd, d, HH, mm, ss, MMM) => `${yyyy}/${MMM}/${dd} ${HH}:${mm}`,
+      7: (yyyy, MM, dd, d, HH, mm, ss, MMM) => `${yyyy}/${MMM}/${dd} ${HH}:${mm}:${ss}`,
+      8: (yyyy, MM, dd, d, HH, mm, ss, MMM) => `${MM}-${dd}-${yyyy} ${HH}:${mm}`,
+      9: (yyyy, MM, dd, d, HH, mm, ss, MMM) => `${MM}-${dd}-${yyyy} ${HH}:${mm}:${ss}`,
+      10: (yyyy, MM, dd, d, HH, mm, ss, MMM) => `${yyyy}-${MM}-${dd} ${HH}:${mm}`,
+      11: (yyyy, MM, dd, d, HH, mm, ss, MMM) => `${yyyy}-${MM}-${dd} ${HH}:${mm}:${ss}`,
+      12: (yyyy, MM, dd, d, HH, mm, ss, MMM) => `${MMM}-${dd}-${yyyy} ${HH}:${mm}`,
+      13: (yyyy, MM, dd, d, HH, mm, ss, MMM) => `${MMM}-${dd}-${yyyy} ${HH}:${mm}:${ss}`,
+      14: (yyyy, MM, dd, d, HH, mm, ss, MMM) => `${yyyy}-${MMM}-${dd} ${HH}:${mm}`,
+      15: (yyyy, MM, dd, d, HH, mm, ss, MMM) => `${yyyy}-${MMM}-${dd} ${HH}:${mm}:${ss}`,
+      16: (yyyy, MM, dd, d, HH, mm, ss, MMM) => `${d} ${MMM} ${yyyy} ${HH}:${mm}`,
+      17: (yyyy, MM, dd, d, HH, mm, ss, MMM) => `${d} ${MMM} ${yyyy} ${HH}:${mm}:${ss}`
+  };
+
+function getLettersMonth(MM) {
+    const months = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    return months[MM];
+}
+
+function getDate() {
+
+  if (!selected) return null;
+
+  const selectedIndex = parseInt(selected.dataset.index);
+  const formatFunction = dateFormats[selectedIndex];
+
+  if (!formatFunction) return null;
+
+  const date = new Date();
+  const yyyy = date.getFullYear();
+  let MM = date.getMonth() + 1;
+  const MMM = getLettersMonth(MM);
+  let dd = date.getDate();
+  const d = date.getDate();
+  const HH = date.getHours();
+  let mm = date.getMinutes();
+  let ss = date.getSeconds();
+
+  if (dd < 10) dd = "0" + dd;
+  if (MM < 10) MM = "0" + MM;
+  if (mm < 10) mm = "0" + mm;
+  if (ss < 10) ss = "0" + ss;
+
+  const formattedDate = formatFunction(yyyy, MM, dd, d, HH, mm, ss, MMM);
+  console.log(formattedDate);
+  return formattedDate;
+}
