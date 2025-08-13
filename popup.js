@@ -1,8 +1,20 @@
 let selected = null;
+let formattedDate = null;
+
 document.addEventListener("DOMContentLoaded", () => {
   const options = document.querySelectorAll(".dropdown-option");
   const formatButton = document.querySelector('.format-button');
   const writeButton = document.querySelector('.write-button');
+  const storage = (typeof browser !== "undefined" ? browser : chrome).storage;
+
+  storage.local.get("selectedIndex", data => {
+  if (typeof data.selectedIndex === "number") {
+    options.forEach(opt => opt.classList.remove("selected"));
+    options[data.selectedIndex].classList.add("selected");
+    selected = options[data.selectedIndex];
+    getDate();
+  }
+});
 
 //* Sélection d’un format au clic
   options.forEach((option, index) => {
@@ -11,10 +23,24 @@ document.addEventListener("DOMContentLoaded", () => {
       options.forEach(opt => opt.classList.remove("selected"));
       option.classList.add("selected");
       selected = document.querySelector(".dropdown-option.selected");
+      storage.local.set({selectedIndex : index});
       if (selected) console.log(selected.textContent);
       getDate();
     });
   });
+
+//* Permet de copier (clipboard) la date au format choisis
+  writeButton.addEventListener("click", () => {
+    if (!selected) {
+      swal({
+        text: "Please, select a format.",
+        icon: "warning",
+        button: "Ok",
+      });
+      return;
+    }
+    navigator.clipboard.writeText(formattedDate);
+  })
 
   const patternTexts = [
     "MM/dd/yyyy HH:mm",
@@ -131,7 +157,7 @@ function getDate() {
   if (mm < 10) mm = "0" + mm;
   if (ss < 10) ss = "0" + ss;
 
-  const formattedDate = formatFunction(yyyy, MM, dd, d, HH, mm, ss, MMM);
+  formattedDate = formatFunction(yyyy, MM, dd, d, HH, mm, ss, MMM);
   console.log(formattedDate);
   return formattedDate;
 }

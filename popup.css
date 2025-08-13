@@ -104,3 +104,26 @@ body {
   cursor: default;
   pointer-events: none;
 }
+
+.swal-modal {
+  background-color: #f5f5f5;
+}
+
+.swal-text {
+  font-size: 16px;
+  font-family: 'Sans Code', monospace;
+}
+
+.swal-button {
+  background-color: #2B93D0;
+  width: 250px;
+  color: rgb(255, 255, 255);
+  font-size: 16px;
+  font-family: 'Sans Code', monospace;
+  border: none;
+  cursor: pointer;
+}
+
+.swal-button:hover {
+  background-color: #2b94d0c0;
+}
