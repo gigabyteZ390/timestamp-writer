@@ -45,6 +45,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const patternTexts = [
     "MM/dd/yyyy HH:mm",
     "MM/dd/yyyy HH:mm:ss",
+    "dd/MM/yyyy HH:mm",
+    "dd/MM/yyyy HH:mm:ss",
     "yyyy/MM/dd HH:mm",
     "yyyy/MM/dd HH:mm:ss",
     "MMM/dd/yyyy HH:mm",
@@ -66,6 +68,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const previewTexts = [
     "01/22/1970 00:00",
     "01/22/1970 00:00:00",
+    "22/01/1970 00:00",
+    "22/01/1970 00:00:00",
     "1970/01/22 00:00",
     "1970/01/22 00:00:00",
     "Jan/22/1970 00:00",
