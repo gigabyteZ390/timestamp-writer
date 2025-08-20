@@ -1,3 +1,5 @@
+import { bindKey, bindKeyCombo } from "./libs/keystrokes.js";
+
 let selected = null;
 let formattedDate = null;
 

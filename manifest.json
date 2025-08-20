@@ -15,7 +15,8 @@
     "default_icon": "icons/extension_icon@48px.png"
   },
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "background.js",
+    "type": "module"
   },
   "permissions": ["storage", "tabs", "scripting", "commands", "activeTab"],
   "host_permissions": ["<all_urls>"],
@@ -30,7 +31,7 @@
     "suggested_key": {
       "default": "Ctrl+Shift+Z"
     },
-    "description": "Insert timestamp at cursor"
+    "description": "Insert timestamp with a shortcut"
   }
   }
 }
