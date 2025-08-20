@@ -1,5 +1,3 @@
-import { bindKey, bindKeyCombo } from "./libs/keystrokes.js";
-
 let selected = null;
 let formattedDate = null;
 
@@ -32,17 +30,19 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 //* Permet de copier (clipboard) la date au format choisis
-  writeButton.addEventListener("click", () => {
-    if (!selected) {
-      swal({
-        text: "Please, select a format.",
-        icon: "warning",
-        button: "Ok",
-      });
-      return;
-    }
-    navigator.clipboard.writeText(formattedDate);
-  })
+function handleWriteClick() {
+  if (!selected) {
+    swal({
+      text: "Please, select a format.",
+      icon: "warning",
+      button: "Ok",
+    });
+    return;
+  }
+  navigator.clipboard.writeText(formattedDate);
+}
+
+writeButton.addEventListener("click", handleWriteClick);
 
   const patternTexts = [
     "MM/dd/yyyy HH:mm",

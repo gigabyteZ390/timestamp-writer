@@ -15,8 +15,7 @@
     "default_icon": "icons/extension_icon@48px.png"
   },
   "background": {
-    "service_worker": "background.js",
-    "type": "module"
+    "service_worker": "background.js"
   },
   "permissions": ["storage", "tabs", "scripting", "commands", "activeTab"],
   "host_permissions": ["<all_urls>"],
