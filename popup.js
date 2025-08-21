@@ -96,18 +96,20 @@ writeButton.addEventListener("click", handleWriteClick);
   let buttonContent = true;
 
 //* permet de changer la vue entre pattern et preview
-  formatButton.addEventListener('click', () => {
+  function toggleFormatView() {
     const toggleLinkContent = linkContent ? previewTexts : patternTexts;
     const toggleButtonContent = buttonContent ? patternFormat : previewFormat;
+
     options.forEach((a, i) => {
-      if (toggleLinkContent[i] && toggleButtonContent) {
-        a.textContent = toggleLinkContent[i];
-      }
+      a.textContent = toggleLinkContent[i];
     });
     formatButton.textContent = toggleButtonContent;
+
     buttonContent = !buttonContent;
     linkContent = !linkContent;
-  });
+  }
+
+  formatButton.addEventListener('click', toggleFormatView);
 })
 
   const dateFormats = {
