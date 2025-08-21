@@ -2,18 +2,35 @@ let selected = null;
 let formattedDate = null;
 
 document.addEventListener("DOMContentLoaded", () => {
+  const colorModeButton = document.querySelector('.color-mode-button');
+  const image = colorModeButton.querySelector('img');
   const options = document.querySelectorAll(".dropdown-option");
   const formatButton = document.querySelector('.format-button');
   const writeButton = document.querySelector('.write-button');
   const storage = (typeof browser !== "undefined" ? browser : chrome).storage;
 
-  storage.local.get("selectedIndex", data => {
-  if (typeof data.selectedIndex === "number") {
-    options.forEach(opt => opt.classList.remove("selected"));
-    options[data.selectedIndex].classList.add("selected");
-    selected = options[data.selectedIndex];
-    getDate();
+//* Permet de changer l'affichage entre dark mode et light mode
+  if (localStorage.getItem('darkMode') === 'true') {
+    document.body.classList.add('dark-mode');
+    image.src = "icons/eye_closed_icon@24px.svg";
+  } else {
+    image.src = "icons/eye_icon@24px.svg";
   }
+
+  colorModeButton.addEventListener('click', () => {
+    const isDark = document.body.classList.toggle('dark-mode');
+    localStorage.setItem('darkMode', isDark);
+    image.src = isDark ? "icons/eye_closed_icon@24px.svg" : "icons/eye_icon@24px.svg";
+  });
+
+//* Permet d'enregister le format séléctionné
+  storage.local.get("selectedIndex", data => {
+    if (typeof data.selectedIndex === "number") {
+      options.forEach(opt => opt.classList.remove("selected"));
+      options[data.selectedIndex].classList.add("selected");
+      selected = options[data.selectedIndex];
+      getDate();
+    }
 });
 
 //* Sélection d’un format au clic

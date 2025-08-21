@@ -2,13 +2,13 @@
   "manifest_version": 3,
   "name": "timestamp-writer",
   "version": "1.0",
-  "description": "Write the timestamp in a customed way",
+  "description": "Write the timestamp in a customized way",
   "icons": {
     "16": "icons/extension_icon@16px.png",
     "32": "icons/extension_icon@32px.png",
     "48": "icons/extension_icon@48px.png",
     "128": "icons/extension_icon@128px.png",
-    "256": "icons/extension_icon@256px.png"
+    "256": "icons/extension_icon@128px.png"
   },
   "action": {
     "default_popup": "popup.html",
@@ -17,20 +17,12 @@
   "background": {
     "service_worker": "background.js"
   },
-  "permissions": ["storage", "tabs", "scripting", "commands", "activeTab"],
+  "permissions": ["storage", "scripting", "activeTab"],
   "host_permissions": ["<all_urls>"],
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
       "js": ["content.js"]
     }
-  ],
-  "commands": {
-  "insert-timestamp": {
-    "suggested_key": {
-      "default": "Ctrl+Shift+Z"
-    },
-    "description": "Insert timestamp with a shortcut"
-  }
-  }
+  ]
 }
