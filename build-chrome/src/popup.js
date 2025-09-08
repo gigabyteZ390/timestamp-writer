@@ -12,15 +12,15 @@ document.addEventListener("DOMContentLoaded", () => {
 //* Permet de changer l'affichage entre dark mode et light mode
   if (localStorage.getItem('darkMode') === 'true') {
     document.body.classList.add('dark-mode');
-    image.src = "icons/eye_closed_icon@24px.svg";
+    image.src = "../icons/eye_closed_icon@24px.svg";
   } else {
-    image.src = "icons/eye_icon@24px.svg";
+    image.src = "../icons/eye_icon@24px.svg";
   }
 
   colorModeButton.addEventListener('click', () => {
     const isDark = document.body.classList.toggle('dark-mode');
     localStorage.setItem('darkMode', isDark);
-    image.src = isDark ? "icons/eye_closed_icon@24px.svg" : "icons/eye_icon@24px.svg";
+    image.src = isDark ? "../icons/eye_closed_icon@24px.svg" : "../icons/eye_icon@24px.svg";
   });
 
 //* Permet d'enregister le format séléctionné
