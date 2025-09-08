@@ -1,5 +1,5 @@
 {
-  "manifest_version": 3,
+  "manifest_version": 2,
   "name": "timestamp-writer",
   "version": "1.0",
   "description": "Write the timestamp in a customized way",
@@ -10,13 +10,17 @@
     "128": "icons/extension_icon@128px.png",
     "256": "icons/extension_icon@128px.png"
   },
-  "action": {
+  "browser_action": {
     "default_popup": "src/popup.html",
     "default_icon": "icons/extension_icon@48px.png"
   },
   "background": {
-    "service_worker": "src/background.js"
+    "scripts": ["src/background.js"],
+    "persistent": true
   },
-  "permissions": ["storage", "scripting", "activeTab"],
-  "host_permissions": []
+  "permissions": [
+    "storage",
+    "tabs",
+    "activeTab"
+  ]
 }
